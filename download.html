@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download - scLAB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>scLAB</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+                <li><a href="download.html" class="active">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="download-page">
+        <div class="container">
+            <header class="download-header">
+                <h1>Download scLAB</h1>
+                <p class="version-info">Current Version: <span class="version-badge">1.0.0</span></p>
+                <p class="release-date">Released: January 2026</p>
+            </header>
+
+            <section class="download-options">
+                <h2>Choose Your Platform</h2>
+
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <div class="platform-icon">🍎</div>
+                        <h3>macOS</h3>
+                        <p class="platform-requirements">macOS 10.15 (Catalina) or later</p>
+                        <div class="download-buttons">
+                            <a href="#" class="btn btn-primary" onclick="alert('Download link will be available when app is built')">
+                                Download for macOS (Intel)
+                            </a>
+                            <a href="#" class="btn btn-primary" onclick="alert('Download link will be available when app is built')">
+                                Download for macOS (Apple Silicon)
+                            </a>
+                        </div>
+                        <p class="file-info">DMG installer (~50 MB)</p>
+                    </div>
+
+                    <div class="platform-card">
+                        <div class="platform-icon">🪟</div>
+                        <h3>Windows</h3>
+                        <p class="platform-requirements">Windows 10 or later (64-bit)</p>
+                        <div class="download-buttons">
+                            <a href="#" class="btn btn-primary" onclick="alert('Download link will be available when app is built')">
+                                Download for Windows
+                            </a>
+                        </div>
+                        <p class="file-info">MSI installer (~50 MB)</p>
+                    </div>
+
+                    <div class="platform-card">
+                        <div class="platform-icon">🐧</div>
+                        <h3>Linux</h3>
+                        <p class="platform-requirements">Ubuntu 20.04+ or equivalent</p>
+                        <div class="download-buttons">
+                            <a href="#" class="btn btn-primary" onclick="alert('Download link will be available when app is built')">
+                                Download .deb
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="alert('Download link will be available when app is built')">
+                                Download AppImage
+                            </a>
+                        </div>
+                        <p class="file-info">DEB or AppImage (~50 MB)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="installation-guide">
+                <h2>Installation Instructions</h2>
+
+                <div class="install-steps">
+                    <div class="install-step">
+                        <h3>1. Install Python</h3>
+                        <p>
+                            scLAB requires Python 3.9 or higher. Download from
+                            <a href="https://www.python.org/downloads/" target="_blank">python.org</a>
+                        </p>
+                        <div class="code-block">
+                            <code>python --version</code>
+                        </div>
+                        <p class="code-description">Verify Python is installed (should show 3.9 or higher)</p>
+                    </div>
+
+                    <div class="install-step">
+                        <h3>2. Install Python Dependencies</h3>
+                        <p>Open a terminal or command prompt and run:</p>
+                        <div class="code-block">
+                            <code>pip install scanpy numpy pandas anndata matplotlib scipy</code>
+                        </div>
+                        <p class="code-description">This will install all required Python packages</p>
+                    </div>
+
+                    <div class="install-step">
+                        <h3>3. Install scLAB</h3>
+                        <ul>
+                            <li><strong>macOS:</strong> Open the DMG file and drag scLAB to Applications</li>
+                            <li><strong>Windows:</strong> Run the MSI installer and follow the setup wizard</li>
+                            <li><strong>Linux:</strong> Install the DEB package or run the AppImage directly</li>
+                        </ul>
+                    </div>
+
+                    <div class="install-step">
+                        <h3>4. Launch scLAB</h3>
+                        <p>
+                            Find scLAB in your Applications folder (macOS), Start Menu (Windows),
+                            or application launcher (Linux) and launch it.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="build-from-source">
+                <h2>Build from Source</h2>
+                <p>
+                    For developers who want to build scLAB from source or contribute to the project:
+                </p>
+
+                <div class="code-block">
+                    <code>
+                        git clone https://github.com/yourusername/scLAB.git<br>
+                        cd scLAB<br>
+                        npm install<br>
+                        cd python && pip install -r requirements.txt && cd ..<br>
+                        npm run tauri dev
+                    </code>
+                </div>
+
+                <p class="build-note">
+                    See the <a href="documentation.html">documentation</a> for detailed build instructions.
+                </p>
+            </section>
+
+            <section class="system-requirements-detailed">
+                <h2>Detailed System Requirements</h2>
+
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <h3>Minimum</h3>
+                        <ul>
+                            <li><strong>OS:</strong> macOS 10.15+ / Windows 10+ / Ubuntu 20.04+</li>
+                            <li><strong>CPU:</strong> Dual-core processor</li>
+                            <li><strong>RAM:</strong> 8 GB</li>
+                            <li><strong>Storage:</strong> 5 GB free space</li>
+                            <li><strong>Python:</strong> 3.9 or higher</li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-card recommended">
+                        <h3>Recommended</h3>
+                        <ul>
+                            <li><strong>OS:</strong> Latest macOS / Windows 11 / Ubuntu 22.04+</li>
+                            <li><strong>CPU:</strong> Quad-core processor or better</li>
+                            <li><strong>RAM:</strong> 16 GB or more</li>
+                            <li><strong>Storage:</strong> 10 GB free space (SSD preferred)</li>
+                            <li><strong>Python:</strong> 3.10 or 3.11</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="performance-note">
+                    <p>
+                        <strong>Note:</strong> For datasets with more than 50,000 cells, we recommend
+                        at least 16 GB of RAM. Very large datasets (>100,000 cells) may require 32 GB
+                        or more for optimal performance.
+                    </p>
+                </div>
+            </section>
+
+            <section class="release-notes">
+                <h2>Release Notes</h2>
+
+                <div class="version-history">
+                    <div class="version-entry">
+                        <h3>Version 1.0.0 <span class="version-date">January 2026</span></h3>
+                        <h4>Initial Release</h4>
+                        <ul>
+                            <li>Complete single-cell analysis pipeline</li>
+                            <li>Support for 10X Genomics h5 and AnnData h5ad files</li>
+                            <li>Quality control and preprocessing</li>
+                            <li>PCA and UMAP dimensionality reduction</li>
+                            <li>Leiden clustering algorithm</li>
+                            <li>Differential expression analysis</li>
+                            <li>Interactive visualizations with Plotly</li>
+                            <li>Cross-platform support (macOS, Windows, Linux)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="support">
+                <h2>Need Help?</h2>
+                <p>
+                    Check out our <a href="documentation.html">documentation</a> for installation
+                    guides, tutorials, and troubleshooting tips.
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 scLAB. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

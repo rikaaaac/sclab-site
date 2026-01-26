@@ -24,8 +24,8 @@
         <aside class="docs-sidebar">
             <ul>
                 <li><a href="#getting-started">Getting Started</a></li>
-                <li><a href="#system-requirements">System Requirements</a></li>
-                <li><a href="#installation">Installation</a></li>
+                <!-- <li><a href="#system-requirements">System Requirements</a></li>
+                <li><a href="#installation">Installation</a></li> -->
                 <li><a href="#loading-data">Loading Data</a></li>
                 <li><a href="#preprocessing">Preprocessing</a></li>
                 <li><a href="#analysis">Analysis</a></li>
@@ -40,13 +40,13 @@
             <section id="getting-started">
                 <h2>Getting Started</h2>
                 <p>
-                    Welcome to scLAB! This guide will help you get up and running with single-cell
-                    RNA sequencing analysis. scLAB provides a complete workflow for analyzing your
-                    single-cell data without requiring any coding knowledge.
+                    This guide will help you get up and running with single-cell
+                    RNA-seq analysis (scRNA-seq). scLAB provides a complete workflow for analyzing your
+                    single-cell data without any coding required.
                 </p>
             </section>
 
-            <section id="system-requirements">
+            <!-- <section id="system-requirements">
                 <h2>System Requirements</h2>
                 <h3>Minimum Requirements</h3>
                 <ul>
@@ -65,9 +65,9 @@
                     <li>matplotlib</li>
                     <li>scipy</li>
                 </ul>
-            </section>
+            </section> -->
 
-            <section id="installation">
+            <!-- <section id="installation">
                 <h2>Installation</h2>
                 <h3>Step 1: Install Python</h3>
                 <p>
@@ -94,55 +94,69 @@
                 <p>
                     After installation, launch scLAB from your applications folder or start menu.
                 </p>
-            </section>
+            </section> -->
 
             <section id="loading-data">
                 <h2>Loading Data</h2>
-                <p>scLAB supports two types of data files:</p>
+                <p>scLAB supports two types of scRNA-seq data files:</p>
 
-                <h3>1. 10X Genomics h5 Files</h3>
+                <h3>1. Cellranger Output h5 Files</h3>
                 <p>
-                    Load raw count data from CellRanger output. You can load multiple h5 files
-                    and scLAB will concatenate them for batch analysis.
+                    Load raw count data from CellRanger output. Alternatively, you can load 
+                    multiple h5 files (multiple samples) and scLAB will concatenate them.
                 </p>
-                <ul>
+                <!-- <ul>
                     <li>Click "Load Data" on the home page</li>
                     <li>Select "10X Genomics (.h5)" format</li>
                     <li>Choose one or more h5 files</li>
                     <li>scLAB will automatically concatenate multiple files</li>
-                </ul>
+                </ul> -->
 
-                <h3>2. Pre-processed h5ad Files</h3>
+                <h3>2. Processed h5ad Files</h3>
                 <p>
                     Load already-processed AnnData files (h5ad format) for visualization and
                     secondary analysis.
                 </p>
-                <ul>
+                <!-- <ul>
                     <li>Click "Load Data" on the home page</li>
                     <li>Select "AnnData (.h5ad)" format</li>
                     <li>Choose your h5ad file</li>
                     <li>Skip to visualization or run additional analyses</li>
-                </ul>
+                </ul> -->
             </section>
 
             <section id="preprocessing">
                 <h2>Preprocessing Pipeline</h2>
                 <p>
-                    For raw 10X data, follow these preprocessing steps in order:
+                    Informed by Scanpy, scLAB supports the following quality control workflow:
                 </p>
 
                 <h3>1. Quality Control (QC)</h3>
-                <p>Filter cells and genes based on quality metrics:</p>
-                <ul>
-                    <li><strong>Minimum genes per cell:</strong> Remove cells with too few genes (default: 200)</li>
-                    <li><strong>Minimum cells per gene:</strong> Remove genes expressed in too few cells (default: 3)</li>
-                    <li><strong>Mitochondrial content:</strong> Filter cells with high mitochondrial gene percentage</li>
+                <p>Divided into basic and advanced quality control:</p>
+                <ul> 
+                    <li><strong>Basic quality control:</strong> Filter cells based on minimum genes per cells
+                        and minimum cells per gene thresholds:
+                        <ul>
+                            <li><strong>Minimum genes per cell:</strong> Remove cells with too few genes (default: 200)</li>
+                            <li><strong>Minimum cells per gene:</strong> Remove genes expressed in too few cells (default: 3)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Advanced quality control: </strong> Calculate standard quality metrics:
+                        <ul>
+                            <li><strong>n_genes_by_counts:</strong> Total number of genes expressed in each cell</li>
+                            <li><strong>total_counts:</strong> Total counts (UMIs) per cell</li>
+                            <li><strong> (Optional) pct_counts_mt:</strong> Percentage of mitochondrial gene counts per cell</li>
+                            <li><strong> (Optional) rb_counts_mt:</strong> Percentage of ribosomal gene counts per cell</li>
+                            <li><strong> (Optional) hb_counts_mt:</strong> Percentage of hemoglobin gene counts per cell</li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <h3>2. Normalization</h3>
                 <p>
                     Normalize gene expression to account for sequencing depth differences between cells.
-                    scLAB uses standard log-normalization.
+                    scLAB uses standard log-normalization. Default is 10,000 counts per cell. Users can 
+                    choose if they want to normalize to the median total counts per cell as well.
                 </p>
 
                 <h3>3. Feature Selection</h3>
@@ -221,7 +235,7 @@
                 </ul>
             </section>
 
-            <section id="troubleshooting">
+            <!-- <section id="troubleshooting">
                 <h2>Troubleshooting</h2>
 
                 <h3>Python Not Found Error</h3>
@@ -257,13 +271,13 @@
                 <p>
                     For additional support, please check our GitHub repository or contact support.
                 </p>
-            </section>
+            </section> -->
         </main>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 scLAB. All rights reserved.</p>
+            <p>&copy; 2026 scLAB by Rika Chan. All rights reserved.</p>
         </div>
     </footer>
 </body>

@@ -28,6 +28,8 @@ the GitHub Actions workflow will automatically:
 - create a GitHub release with the tag version
 - generate release notes from recent commits
 
+**Make sure to push .github/workflows
+
 ### 4. upload build artifacts
 
 after the release is created, upload your build artifacts:

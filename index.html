@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="has-gradient-bg">
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -34,14 +34,28 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <h1>scLAB</h1>
-            <p class="tagline">No-Code Single-Cell RNA-Seq Analysis Platform</p>
+    <header class="hero-fullscreen">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Single-Cell Analysis Made Easy</h1>
+                <p class="hero-subtitle">No-code platform for single-cell RNA-seq analysis with complete workflow, downstream analyses, and interactive visualizations</p>
+                <div class="hero-cta">
+                    <a href="download.html" class="btn btn-primary">Get Started</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#about">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </a>
         </div>
     </header>
 
-    <section class="features">
+    <section class="features" id="about">
         <div class="container">
             <h2>What is scLAB?</h2>
             <p class="intro">
@@ -147,7 +161,7 @@
                 </div>
                 <div class="tech-item">
                     <h4>Python + Scanpy</h4>
-                    <p>Industry-standard analysis engine</p>
+                    <p>Powerful engine for scientific computing</p>
                 </div>
                 <div class="tech-item">
                     <h4>ECharts</h4>
@@ -162,5 +176,7 @@
             <p>&copy; 2026 scLAB by Rika Chan. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

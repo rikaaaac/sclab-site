@@ -27,10 +27,9 @@
                 <!-- <li><a href="#system-requirements">System Requirements</a></li>
                 <li><a href="#installation">Installation</a></li> -->
                 <li><a href="#loading-data">Loading Data</a></li>
-                <li><a href="#preprocessing">Preprocessing</a></li>
-                <li><a href="#analysis">Analysis</a></li>
+                <li><a href="#preprocessing">Standard Analysis</a></li>
+                <li><a href="#analysis">Advanced Analysis</a></li>
                 <li><a href="#visualization">Visualization</a></li>
-                <li><a href="#troubleshooting">Troubleshooting</a></li>
             </ul>
         </aside>
 
@@ -126,7 +125,7 @@
             </section>
 
             <section id="preprocessing">
-                <h2>Preprocessing Pipeline</h2>
+                <h2>Standard Analysis Modules</h2>
                 <p>
                     Informed by Scanpy, scLAB supports the following quality control workflow:
                 </p>
@@ -166,74 +165,128 @@
                     by accounting for batch effects.
                 </p>
 
-                <h3>4. Scaling</h3>
+                <h3>4. Regression</h3>
                 <p>
-                    Scale gene expression to zero mean and unit variance for downstream analysis.
+                    Regress out unwanted variation from your dataset (e.g. techincal effect).
                 </p>
+
+                <h3>5. Principal Component Analysis (PCA)</h3>
+                <p>
+                    Perform linear dimensionality reduction using PCA. Default: 50 components. Option to scale data (recommended when performing PCA).
+                    If data is not scaled, PCA will run on normalized data. 
+                </p>
+
+                <h3> 6. Non-linear dimensionality Reduction (UMAP/tSNE) </h3>
+                <p>
+                    Perform UMAP/tSNE dimensionality algorithms to create a 2D visualization of \
+                    your cells based on gene expression similarity. Assumed that PCA was performed prior to this.
+                    <ul> 
+                        <li> UMAP parameters: </li>
+                            <ul>
+                                <li> Number of neighbors: size of local neighborhoods used to learn manifold structure. 
+                                    It controls the balance between local and global structure. Default: 15.
+                                </li>
+                                <li> Minimum distance: controls how tightly points are packed together in the low dimensional space.
+                                    Default: 0.1.
+                                </li>
+                            </ul>
+                        
+                        <li> tSNE parameters: </li>
+                        <ul>
+                            <li> Perplexity: controls balance between local and global structure. Default: 30.
+                            </li>
+                            <li> Early exaggeration: helps tSNE find better global structure. Default: 12.
+                            </li>
+                            <li> Learning rate: controls how far points move during each step of optimization. Default: 1000.
+                            </li>
+                        </ul>
+
+                    </ul>
+                </p>
+
+                <h3> 7. Clustering </h3>
+                <p>
+                    Perform clustering using Leiden algorithm. Adjust resolution between 0.1-2.
+                    Make sure to perform either UMAP/tSNE first to view 
+                    clustering results on computed embeddings.
+                </p>
+
+
             </section>
 
             <section id="analysis">
-                <h2>Analysis Methods</h2>
+                <h2>Advanced Analysis Modules</h2>
 
-                <h3>Dimensionality Reduction</h3>
-                <h4>PCA (Principal Component Analysis)</h4>
+                <h3>Cell-Level Tasks</h3>
                 <p>
-                    Reduces high-dimensional gene expression data to a smaller number of principal
-                    components. Default: 50 components.
+                    Available tasks:
+                    <ul>
+                        <li><strong>Label clusters:</strong> give custom names to clusters identified from clustering algorithm. 
+                            scLAB automatically detects column names that start with "leiden_", which can used to 
+                            provide custom names to. If your column names are different, you can rename the columns
+                            using Dataset Manager module. You can name the new column consisting of custom names;
+                            however, it is recommended that you name the column starting with "leiden_" for scLAB
+                            to be able to recognize the column for other tasks such as differential gene expression analysis.
+                        </li>
+                        <li><strong>Subset by cell metadata:</strong> subset your dataset by columns in your .obs of your AnnData. 
+                            scLAB automatically detects the data types of each column in .obs and provide a way
+                            to efficiently subset them. E.g. if your dataset contain 3 samples, you may subset by 
+                            selecting desired samples. If you wish to subset by numerical values, scLAB also provides
+                            a threshold for subsetting. Subsetted datasets will be saved to memory and available for exports via Export Datasets module.</li>
+                        <li><strong>Subset by gene expression:</strong> users may wish to subset their dataset give single- or multi-genes 
+                            expression thresholds. Subsetted datasets will be saved to memory and available for exports via 
+                            Export Datasets module. </li>
+                        <li><strong>Annotate cells:</strong> similar to subset by gene expression, this subtask allows users to 
+                            annotate cells by gene expression threshold, essentially adding a boolean column to .obs containing values 
+                            of True or False, pertaining to the chosen gene expression criteria. For example, users may use this 
+                            to annotate cells that are positive for gene X. This method does not subset your dataset, but add a column of True/False in .obs.</li>
+                    </ul>
                 </p>
 
-                <h4>UMAP (Uniform Manifold Approximation and Projection)</h4>
+                <h3>Gene-Level Tasks</h3>
                 <p>
-                    Creates a 2D visualization of your cells based on gene expression similarity.
-                    Parameters:
-                </p>
-                <ul>
-                    <li><strong>n_neighbors:</strong> Controls local vs global structure (default: 15)</li>
-                    <li><strong>min_dist:</strong> Controls how tightly points cluster (default: 0.1)</li>
-                </ul>
+                    Available tasks:
+                    <ul>
+                        <li><strong>Differential gene expression:</strong> perform differential gene expression analysis. scLAB
+                            automatically detects columns starting with "leiden_" to be available to perform differential expression analysis.
+                            You can the names of your columns by going to Dataset Manager module. Available parameters:
+                            <ul>
+                                <li>Method: Wilcoxon (default), t-test, overestimated t-test</li>
+                                <li>Matrix used: raw count (default), normalized values</li>
+                            </ul> 
+                            Users are able to customize which groups within their column that they want to compare with.
+                            Results are available for export as csv files.
+                        </li>
 
-                <h3>Clustering</h3>
-                <p>
-                    scLAB uses the Leiden algorithm for community detection. Adjust the resolution
-                    parameter to control cluster granularity:
-                </p>
-                <ul>
-                    <li><strong>Lower resolution (0.4-0.8):</strong> Fewer, larger clusters</li>
-                    <li><strong>Higher resolution (1.0-2.0):</strong> More, smaller clusters</li>
-                </ul>
-
-                <h3>Differential Expression Analysis</h3>
-                <p>
-                    Find marker genes that distinguish cell clusters or compare between conditions.
-                    scLAB uses Wilcoxon rank-sum test by default.
+                        <li>Co-expression analysis: perform correlation analysis between two genes using spearman or
+                            pearson method.
+                        </li>
+                    </ul>
                 </p>
             </section>
 
             <section id="visualization">
                 <h2>Visualization</h2>
-                <p>scLAB provides interactive visualizations powered by Plotly:</p>
+                <p>scLAB provides interactive visualizations powered by ECharts:</p>
 
-                <h3>UMAP Plots</h3>
+                <h3>Gene Expression Plots</h3>
                 <p>
-                    Visualize cells in 2D space, colored by clusters, gene expression, or metadata.
+                    Visualize cells in 2D space colored by gene expression. Plots available for export as png.
                 </p>
 
-                <h3>Violin Plots</h3>
+                <h3>Cluster & Cell Groups Plots</h3>
                 <p>
-                    Compare gene expression distributions across clusters.
+                    Visualize cells in 2D space colored by clusters and cell groups within .obs of your dataset.
+                    Plots available for export as png.
                 </p>
 
-                <h3>Heatmaps</h3>
+                <h3>Quality Metrics Plots</h3>
                 <p>
-                    Display expression patterns of marker genes across clusters.
+                    Visualize quality metrics violin plots performed on your dataset. This won't be 
+                    available if you haven't performed standard QC methods using Scanpy's calculate_qc_metrics function.
+                    To do this in scLAB, navigate to the Quality Control module.
                 </p>
 
-                <h3>Interactive Features</h3>
-                <ul>
-                    <li>Zoom and pan</li>
-                    <li>Hover for cell information</li>
-                    <li>Export plots as PNG or SVG</li>
-                </ul>
             </section>
 
             <!-- <section id="troubleshooting">
